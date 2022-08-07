@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Department } from 'app/models/Department';
 import { ServerHttpService } from 'app/Services/server-http.service';
-import { Router } from 'express';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpComponent } from 'app/pop-up/pop-up.component';
 
 @Component({
   selector: 'app-table-list',
@@ -12,10 +13,19 @@ export class TableListComponent implements OnInit {
   public departments: Department[] = [];
   constructor(
     private serverHttp: ServerHttpService,
+    private dialogRef: MatDialog
   ) { }
 
   ngOnInit() {
     this.loadData();
+  }
+
+  openDialog(){
+    this.dialogRef.open(PopUpComponent, {
+      data: {
+        name: 'samuel'
+      }
+    });
   }
 
   private loadData() {
